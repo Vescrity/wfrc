@@ -13,4 +13,5 @@ Simple bash script to record screen on wlroots-based compositors using wf-record
 
 ## Usage
 
-Bind it to a keybind. Run for the first time it will run slurp and get a area to record and the second time it will stop recording and copy it to your clipboard.
+- (optional) Add it to your PATH
+- Bind it to a keybind. Run it for the first time it will run slurp and get an area to record and the second time it will stop recording and copy it to your clipboard.
