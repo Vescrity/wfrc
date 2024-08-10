@@ -6,31 +6,23 @@
 SCRIPT_NAME=wfrc
 LOCK=/tmp/WFRCLOCK
 if [ -f "$LOCK" ]; then
+  rm "$LOCK"
   pkill "$SCRIPT_NAME"
-  exit
 fi
 touch "$LOCK"
-kill_child_processes() {
-
-  local pid=$1
-  local child_pids=$(pgrep -P $pid)
-  for child_pid in $child_pids; do
-    kill -TERM $child_pid
-  done
+kill_wfrc() {
+  kill -TERM $wf_recorder_pid
   rm $LOCK
   echo "file://$FILE_NAME" | wl-copy -t 'text/uri-list'
-  if [ -n $CANCELED ]; then
-    notify-send --app-name=$SCRIPT_NAME 'Canceled.' --icon=record
-  else
-    notify-send --app-name=$SCRIPT_NAME 'Finished.' --icon=record
-  fi
+  notify-send --app-name=$SCRIPT_NAME 'Finished.' --icon=record
 }
 
-trap 'kill_child_processes $$' SIGINT SIGTERM EXIT
+trap 'kill_wfrc $$' SIGINT SIGTERM 
 output=$(slurp)
 result=$?
 if ! [ $result -eq 0 ]; then
-  CANCELED1=1
+  rm "$LOCK"
+  notify-send --app-name=$SCRIPT_NAME 'Canceled.' --icon=record
   exit
 fi
 
