@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+[ -n "$WAYLAND_DISPLAY" ] ||  exit 1
+
+SCRIPT_NAME=wfrc
+LOCK=/tmp/WFRCLOCK
+if [ -f "$LOCK" ]; then
+  pkill "$SCRIPT_NAME"
+  exit
+fi
+touch "$LOCK"
+kill_child_processes() {
+
+  local pid=$1
+  local child_pids=$(pgrep -P $pid)
+  for child_pid in $child_pids; do
+    kill -TERM $child_pid
+  done
+  rm $LOCK
+  echo "file://$FILE_NAME" | wl-copy -t 'text/uri-list'
+  if [ -n $CANCELED ]; then
+    notify-send --app-name=$SCRIPT_NAME 'Canceled.' --icon=record
+  else
+    notify-send --app-name=$SCRIPT_NAME 'Finished.' --icon=record
+  fi
+}
+
+trap 'kill_child_processes $$' SIGINT SIGTERM EXIT
+output=$(slurp)
+result=$?
+if ! [ $result -eq 0 ]; then
+  CANCELED1=1
+  exit
+fi
+
+notify-send --app-name=$SCRIPT_NAME 'Rec.' --icon=record
+AUDIO_DEV="$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)"
+FILE_NAME="/tmp/$SCRIPT_NAME-$(date -u +%Y-%m-%dT%H-%M-%S).mp4" 
+wf-recorder -f $FILE_NAME -g "$output" --audio=$AUDIO_DEV &
+
+wf_recorder_pid=$!
+
+wait $wf_recorder_pid
+
