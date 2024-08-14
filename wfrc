@@ -1,20 +1,34 @@
-#!/bin/bash
+#!/usr/bin/bash
 
 
 [ -n "$WAYLAND_DISPLAY" ] ||  exit 1
-
+FOLDER=/tmp
 SCRIPT_NAME=wfrc
 LOCK=/tmp/WFRCLOCK
 if [ -f "$LOCK" ]; then
+  kill $(cat "$LOCK")
   rm "$LOCK"
-  pkill "$SCRIPT_NAME"
+  exit
 fi
-touch "$LOCK"
+echo $$ > "$LOCK"
 kill_wfrc() {
   kill -TERM $wf_recorder_pid
   rm $LOCK
   echo "file://$FILE_NAME" | wl-copy -t 'text/uri-list'
-  notify-send --app-name=$SCRIPT_NAME 'Finished.' --icon=record
+  SIZE="$(ls -lh $FILE_NAME | tr -s ' ' | cut -d ' ' -f 5)"
+  ENDTIME=$(date +%s)
+  duration=$((ENDTIME - STARTTIME))
+  resolution=$(echo $output | cut -d' ' -f2)
+  minutes=$((duration / 60))
+  seconds=$((duration % 60))
+  if [ $minutes -gt 0 ]; then
+    formatted_duration="${minutes}m ${seconds}s"
+  else
+    formatted_duration="${seconds}s"
+  fi
+  notify-send --app-name=$SCRIPT_NAME 'Finished.' \
+    "$formatted_duration | $SIZE | $resolution" --icon=record
+  #notify-send --app-name=$SCRIPT_NAME "Finished." "Size: $(echo $output |cut -d ' '  -f 2), $SIZE\nTime: $RUNTIME s" --icon=record
 }
 
 trap 'kill_wfrc $$' SIGINT SIGTERM 
@@ -30,7 +44,7 @@ notify-send --app-name=$SCRIPT_NAME 'Rec.' --icon=record
 AUDIO_DEV="$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)"
 FILE_NAME="/tmp/$SCRIPT_NAME-$(date -u +%Y-%m-%dT%H-%M-%S).mp4" 
 wf-recorder -f $FILE_NAME -g "$output" --audio=$AUDIO_DEV &
-
+STARTTIME=$(date +%s)
 wf_recorder_pid=$!
 
 wait $wf_recorder_pid
