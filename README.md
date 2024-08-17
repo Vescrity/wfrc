@@ -43,7 +43,7 @@ This script's behavior is controled by environment variables. You can make a scr
 # If no wayland, the error msg
 #WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"
 
-exec /path/to/wfrc
+. /path/to/wfrc
 ```
 
 ## TODO
