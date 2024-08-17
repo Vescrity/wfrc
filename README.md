@@ -20,9 +20,33 @@ Simple bash script to record screen on wlroots-based compositors using wf-record
 - (optional) Bind it to a keybind.
 - Run it for the first time it will run slurp and get an area to record and the second time it will stop recording and copy the video to your clipboard.
 
-## TODO
+## Config
 
-- Support for command option to control notification or not, area or fullscreen, system-audio or microphone or no-sound ...
+This script's behavior is controled by environment variables. You can make a script to set them.
+
+```bash
+# By default it can control where the file will be stored
+#WFRC_FOLDER="/tmp"
+# By default it can control the title of the notification and the file's name
+#SCRIPT_NAME="wfrc"
+# Where the lock file
+#WFRC_LOCK="/tmp/WFRCLOCK"
+# Set the icon of notification
+#WFRC_ICON="record"
+# 1 to enable full screen
+#WFRC_FULL_SCREEN=0
+# 0 to disable notification
+#WFRC_NOTIFY=1
+# Your audio device
+#WFRC_AUDIO_DEV="$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)"
+#WFRC_FILE_NAME="$WFRC_FOLDER/$SCRIPT_NAME-$(date -u +%Y-%m-%dT%H-%M-%S).mp4"
+# If no wayland, the error msg
+#WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"
+
+exec /path/to/wfrc
+```
+
+## TODO
 
 ## Troubleshooting
 

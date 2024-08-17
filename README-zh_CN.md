@@ -20,9 +20,33 @@
 - (可选) 将脚本绑定到快捷键。
 - 第一次执行将启动 `slurp` 以获取录屏区域，并随后执行录屏。再次运行则将停止录屏并将文件复制到剪贴板。
 
-## TODO
+## 行为配置
 
-- 支持命令行参数控制是否开启通知，是否全屏，声音来源取自系统输出还是麦克风或是静音...
+脚本的行为通过环境变量进行控制。你可以另外编写一个脚本来自定义这些变量。
+
+```bash
+# 默认情况下可控制文件存放路径
+#WFRC_FOLDER="/tmp"
+# 默认情况下可控制通知名称，文件名称等
+#SCRIPT_NAME="wfrc"
+# 锁文件的路径
+#WFRC_LOCK="/tmp/WFRCLOCK"
+# 控制通知图标
+#WFRC_ICON="record"
+# 设为 1 进行全屏录屏
+#WFRC_FULL_SCREEN=0
+# 设为 0 不进行通知
+#WFRC_NOTIFY=1
+# 你的音频设备
+#WFRC_AUDIO_DEV="$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)"
+#WFRC_FILE_NAME="$WFRC_FOLDER/$SCRIPT_NAME-$(date -u +%Y-%m-%dT%H-%M-%S).mp4"
+# 不在 wayland 上运行时的提示信息
+#WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"
+
+exec /path/to/wfrc
+```
+
+## TODO
 
 ## 疑难解答
 
