@@ -68,9 +68,9 @@ fi
 WFRC_AUDIO_DEV="${WFRC_AUDIO_DEV:-$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)}"
 WFRC_FILE_NAME="${WFRC_FILE_NAME:-$WFRC_FOLDER/$SCRIPT_NAME-$(date -u +%Y-%m-%dT%H-%M-%S).mp4}"
 if [ $WFRC_FULL_SCREEN -eq 0 ]; then
-    wf-recorder -f $WFRC_FILE_NAME -g "$output" --audio=$WFRC_AUDIO_DEV &
+    wf-recorder -f $WFRC_FILE_NAME -g "$output" --audio=$WFRC_AUDIO_DEV "$@" &
 else
-    wf-recorder -f $WFRC_FILE_NAME --audio=$WFRC_AUDIO_DEV &
+    wf-recorder -f $WFRC_FILE_NAME --audio=$WFRC_AUDIO_DEV "$@" &
 fi
 STARTTIME=$(date +%s)
 wf_recorder_pid=$!

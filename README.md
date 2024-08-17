@@ -2,7 +2,7 @@
 
 English | [中文](README-zh_CN.md)
 
-Simple bash script to record screen on wlroots-based compositors using wf-recorder
+Simple bash script to make recording screen easily by shortcuts. Only work on wlroots based wayland compositors because it uses [wf-recorder](https://github.com/ammen99/wf-recorder) as backend.
 
 ## Dependencies
 
@@ -43,7 +43,7 @@ This script's behavior is controled by environment variables. You can make a scr
 # If no wayland, the error msg
 #WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"
 
-. /path/to/wfrc
+. /path/to/wfrc "$@"
 ```
 
 ## TODO
@@ -57,3 +57,7 @@ Check this:
 LANG=C pactl list sources | grep 'Name.*output'
 ```
   If it got more than one line, change the line in the script which started with AUDIO_DEV, change it to your default audio device, or disable the wrong device through tools like pavucontrol-qt. Or try to make the script can support the option to decide which device to use.
+
+### 2. High CPU usage
+
+It's caused by wf-recorder. If the issue can be resolved by adjusting some command-line options for wf-recorder, please add those options directly to the script, and they will be passed directly to wf-recorder.
