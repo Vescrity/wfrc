@@ -4,6 +4,14 @@ English | [中文](README-zh_CN.md)
 
 Simple bash script to make recording screen easily by shortcuts. Only work on wlroots based wayland compositors because it uses [wf-recorder](https://github.com/ammen99/wf-recorder) as backend.
 
+## Features
+
+- [x] Config by environment variables
+- [x] Area selection
+- [x] Record the audio
+- [x] Notification
+- [x] Copy to your clipboard
+
 ## Dependencies
 
 - wf-recorder
