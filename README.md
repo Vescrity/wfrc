@@ -64,7 +64,7 @@ Check this:
 ```bash
 LANG=C pactl list sources | grep 'Name.*output'
 ```
-  If it got more than one line, change the line in the script which started with AUDIO_DEV, change it to your default audio device, or disable the wrong device through tools like pavucontrol-qt. Or try to make the script can support the option to decide which device to use.
+  If it got more than one line, it means you have more than one audio output device. Use the config script and change `WFRC_AUDIO_DEV` to your device.
 
 ### 2. High CPU usage
 
