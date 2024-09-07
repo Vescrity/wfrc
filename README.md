@@ -68,4 +68,9 @@ LANG=C pactl list sources | grep 'Name.*output'
 
 ### 2. High CPU usage
 
-It's caused by wf-recorder. If the issue can be resolved by adjusting some command-line options for wf-recorder, please add those options directly to the script, and they will be passed directly to wf-recorder.
+It's caused by wf-recorder. If the issue can be resolved by adjusting some command-line options for wf-recorder, please add those options directly to the script, and they will be passed directly to wf-recorder.  
+
+See [here](https://github.com/ammen99/wf-recorder?tab=readme-ov-file#usage):
+
+> To use GPU encoding, use a VAAPI codec (for ex. `h264_vaapi`) and specify a GPU device to use with the `-d` option:
+> `wf-recorder -f test-vaapi.mkv -c h264_vaapi -d /dev/dri/renderD128` ...
