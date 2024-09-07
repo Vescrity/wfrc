@@ -74,3 +74,9 @@ See [here](https://github.com/ammen99/wf-recorder?tab=readme-ov-file#usage):
 
 > To use GPU encoding, use a VAAPI codec (for ex. `h264_vaapi`) and specify a GPU device to use with the `-d` option:
 > `wf-recorder -f test-vaapi.mkv -c h264_vaapi -d /dev/dri/renderD128` ...
+
+For me, just use 
+```bash
+wfrc -c h264_vaapi -d /dev/dri/renderD128
+```
+

@@ -75,3 +75,10 @@ wf-recorder 的原因。若 wf-recorder 可通过调整部分命令行选项来�
 
 > To use GPU encoding, use a VAAPI codec (for ex. `h264_vaapi`) and specify a GPU device to use with the `-d` option:
 > `wf-recorder -f test-vaapi.mkv -c h264_vaapi -d /dev/dri/renderD128` ...
+
+对我而言，用
+```bash
+wfrc -c h264_vaapi -d /dev/dri/renderD128
+```
+即可。
+
