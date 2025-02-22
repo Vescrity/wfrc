@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # v0.0.2
-WFRC_FOLDER="${WFRC_FOLDER:-/tmp}"
+XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
+WFRC_FOLDER="${WFRC_FOLDER:-$XDG_RUNTIME_DIR}"
 SCRIPT_NAME="${SCRIPT_NAME:-wfrc}"
-WFRC_LOCK="${WFRC_LOCK:-/tmp/WFRCLOCK}"
+WFRC_LOCK="${WFRC_LOCK:-$WFRC_FOLDER/WFRCLOCK}"
 # Set the icon of notification
 WFRC_ICON="${WFRC_ICON:-record}"
 if ! [ -n "$WAYLAND_DISPLAY" ]; then

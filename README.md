@@ -34,11 +34,11 @@ This script's behavior is controled by environment variables. You can make a scr
 
 ```bash
 # By default it can control where the file will be stored
-#WFRC_FOLDER="/tmp"
+#WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 # By default it can control the title of the notification and the file's name
 #SCRIPT_NAME="wfrc"
 # Where the lock file
-#WFRC_LOCK="/tmp/WFRCLOCK"
+#WFRC_LOCK="$WFRC_FOLDER/WFRCLOCK"
 # Set the icon of notification
 #WFRC_ICON="record"
 # 1 to enable full screen

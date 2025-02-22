@@ -34,11 +34,11 @@
 
 ```bash
 # 默认情况下可控制文件存放路径
-#WFRC_FOLDER="/tmp"
+#WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 # 默认情况下可控制通知名称，文件名称等
 #SCRIPT_NAME="wfrc"
 # 锁文件的路径
-#WFRC_LOCK="/tmp/WFRCLOCK"
+#WFRC_LOCK="$WFRC_FOLDER/WFRCLOCK"
 # 控制通知图标
 #WFRC_ICON="record"
 # 设为 1 进行全屏录屏
