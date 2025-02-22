@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v0.0.2
+# v0.1.0
 XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 WFRC_FOLDER="${WFRC_FOLDER:-$XDG_RUNTIME_DIR}"
 SCRIPT_NAME="${SCRIPT_NAME:-wfrc}"
