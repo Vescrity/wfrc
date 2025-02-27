@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # v0.1.0
 XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
-WFRC_FOLDER="${WFRC_FOLDER:-$XDG_RUNTIME_DIR}"
+WFRC_FOLDER="${WFRC_FOLDER:-$XDG_RUNTIME_DIR/wfrc}"
 SCRIPT_NAME="${SCRIPT_NAME:-wfrc}"
 WFRC_LOCK="${WFRC_LOCK:-$WFRC_FOLDER/WFRCLOCK}"
 # Set the icon of notification
 WFRC_ICON="${WFRC_ICON:-record}"
+mkdir -p "$WFRC_FOLDER"
 if ! [ -n "$WAYLAND_DISPLAY" ]; then
     WFRC_NOWAYLAND="${WFRC_NOWAYLAND:-No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?}"
     echo "$WFRC_NOWAYLAND" >&2

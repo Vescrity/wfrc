@@ -34,7 +34,7 @@
 
 ```bash
 # 默认情况下可控制文件存放路径
-#WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID}"
+#WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID/wfrc}"
 # 默认情况下可控制通知名称，文件名称等
 #SCRIPT_NAME="wfrc"
 # 锁文件的路径
