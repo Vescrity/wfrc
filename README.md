@@ -20,7 +20,7 @@ Simple bash script to make recording screen by shortcuts easily. Only work on wl
 - slurp
 - libnotify
 - libpulse
-- wl-copy
+- wl-clipboard
 
 ## Usage
 

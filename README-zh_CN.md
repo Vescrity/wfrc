@@ -20,7 +20,7 @@
 - slurp
 - libnotify
 - libpulse
-- wl-copy
+- wl-clipboard
 
 ## 使用方法
 
