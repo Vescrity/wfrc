@@ -45,7 +45,7 @@ kill_wfrc() {
         else
             formatted_duration="${seconds}s"
         fi
-        notify-send --app-name=$SCRIPT_NAME 'Finished.' \
+        notify-send -t 1000 --app-name=$SCRIPT_NAME 'Finished.' \
             "$formatted_duration | $SIZE | $resolution" --icon="$WFRC_ICON"
     fi
 }
@@ -65,7 +65,7 @@ if [ $WFRC_FULL_SCREEN -eq 0 ]; then
 fi
 
 if [ $WFRC_NOTIFY -eq 1 ]; then
-    notify-send --app-name=$SCRIPT_NAME 'Rec.' --icon="$WFRC_ICON"
+    notify-send -t 1000 --app-name=$SCRIPT_NAME 'Rec.' --icon="$WFRC_ICON"
 fi
 WFRC_AUDIO_DEV="${WFRC_AUDIO_DEV:-$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)}"
 WFRC_FILE_NAME="${WFRC_FILE_NAME:-$WFRC_FOLDER/$SCRIPT_NAME-$(date +%Y-%m-%dT%H-%M-%S).mp4}"
