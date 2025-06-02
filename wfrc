@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v0.1.0
+# v0.1.1
 XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 WFRC_FOLDER="${WFRC_FOLDER:-$XDG_RUNTIME_DIR/wfrc}"
 SCRIPT_NAME="${SCRIPT_NAME:-wfrc}"
@@ -67,7 +67,7 @@ fi
 if [ $WFRC_NOTIFY -eq 1 ]; then
     notify-send -t 1000 --app-name=$SCRIPT_NAME 'Rec.' --icon="$WFRC_ICON"
 fi
-WFRC_AUDIO_DEV="${WFRC_AUDIO_DEV:-$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)}"
+WFRC_AUDIO_DEV="${WFRC_AUDIO_DEV:-$(LANG=C pactl get-default-sink)}"
 WFRC_FILE_NAME="${WFRC_FILE_NAME:-$WFRC_FOLDER/$SCRIPT_NAME-$(date +%Y-%m-%dT%H-%M-%S).mp4}"
 if [ $WFRC_FULL_SCREEN -eq 0 ]; then
     wf-recorder -f $WFRC_FILE_NAME -g "$output" --audio=$WFRC_AUDIO_DEV "$@" &

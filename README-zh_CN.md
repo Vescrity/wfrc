@@ -46,7 +46,7 @@
 # 设为 0 不进行通知
 #WFRC_NOTIFY=1
 # 你的音频设备
-#WFRC_AUDIO_DEV="$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)"
+#WFRC_AUDIO_DEV="$(LANG=C pactl get-default-sink).monitor"
 #WFRC_FILE_NAME="$WFRC_FOLDER/$SCRIPT_NAME-$(date +%Y-%m-%dT%H-%M-%S).mp4"
 # 不在 wayland 上运行时的提示信息
 #WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"

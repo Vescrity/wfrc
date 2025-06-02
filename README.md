@@ -46,7 +46,7 @@ This script's behavior is controled by environment variables. You can make a scr
 # 0 to disable notification
 #WFRC_NOTIFY=1
 # Your audio device
-#WFRC_AUDIO_DEV="$(LANG=C pactl list sources | grep 'Name.*output'|cut -d ' ' -f 2)"
+#WFRC_AUDIO_DEV="$(LANG=C pactl get-default-sink).monitor"
 #WFRC_FILE_NAME="$WFRC_FOLDER/$SCRIPT_NAME-$(date +%Y-%m-%dT%H-%M-%S).mp4"
 # If no wayland, the error msg
 #WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"
