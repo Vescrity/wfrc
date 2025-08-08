@@ -12,6 +12,10 @@ Simple bash script to make recording screen by shortcuts easily. Only work on wl
 - [x] Notification
 - [x] Copy to your clipboard
 
+## Install
+
+now in AUR, `wfrc-git`
+
 ## Dependencies
 
 - wf-recorder

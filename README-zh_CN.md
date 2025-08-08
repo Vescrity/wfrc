@@ -12,6 +12,10 @@
 - [x] 通知提醒
 - [x] 自动复制
 
+## 安装
+
+AUR wfrc-git
+
 ## 依赖
 
 - wf-recorder
