@@ -2,7 +2,11 @@
 
 English | [中文](README-zh_CN.md)
 
-Simple bash script to make recording screen by shortcuts easily. Only work on wlroots based wayland compositors because it uses [wf-recorder](https://github.com/ammen99/wf-recorder) as backend.
+Simple bash script to make recording screen by shortcuts easily. Only work on wlroots based wayland compositors 
+because it uses [wf-recorder](https://github.com/ammen99/wf-recorder) or [wl-screenrec](https://github.com/russelltg/wl-screenrec) as backend.
+
+> Since 0.1.2, `wl-screenrec` can be used as backend.
+> If you want to use it please set `WFRC_RECORDER=wl-screenrec`
 
 https://github.com/user-attachments/assets/5424662d-9f1e-4302-888f-3cb0a7e98bca
 
@@ -20,7 +24,7 @@ now in AUR, `wfrc-git`
 
 ## Dependencies
 
-- wf-recorder
+- wf-recorder (or wl-screenrec)
 - bash
 - grep
 - slurp
@@ -39,6 +43,8 @@ now in AUR, `wfrc-git`
 This script's behavior is controled by environment variables. You can make a script to set them.
 
 ```bash
+# Use wf-recorder as default recorder.
+#WFRC_RECORDER="${WFRC_RECORDER:-wf-recorder}"
 # By default it can control where the file will be stored
 #WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID/wfrc}"
 # By default it can control the title of the notification and the file's name
@@ -75,6 +81,8 @@ LANG=C pactl list sources | grep 'Name.*output'
 ### 2. High CPU usage
 
 It's caused by wf-recorder. If the issue can be resolved by adjusting some command-line options for wf-recorder, please add those options directly to the script, and they will be passed directly to wf-recorder.  
+
+> or use `wl-screenrec` as backend.
 
 See [here](https://github.com/ammen99/wf-recorder?tab=readme-ov-file#usage):
 

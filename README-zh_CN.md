@@ -2,7 +2,10 @@
 
 [English](README.md) | 中文
 
-为便于快捷键使用的简易的 [wf-recorder](https://github.com/ammen99/wf-recorder) 的 bash 脚本封装，实现在基于 wlroots 的 wayland 混成器上进行选区录屏。
+为便于快捷键使用的简易的 [wf-recorder](https://github.com/ammen99/wf-recorder) 及 [wl-screenrec](https://github.com/russelltg/wl-screenrec) 的 bash 脚本封装，实现在基于 wlroots 的 wayland 混成器上进行选区录屏。
+
+> 0.1.2 起, 支持使用 `wl-screenrec` 做为录屏后端。
+> 设置 `WFRC_RECORDER=wl-screenrec` 以启用。
 
 https://github.com/user-attachments/assets/5424662d-9f1e-4302-888f-3cb0a7e98bca
 
@@ -39,6 +42,8 @@ AUR wfrc-git
 脚本的行为通过环境变量进行控制。你可以另外编写一个脚本来自定义这些变量。
 
 ```bash
+# 默认使用 wf-recorder
+#WFRC_RECORDER="${WFRC_RECORDER:-wf-recorder}"
 # 默认情况下可控制文件存放路径
 #WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID/wfrc}"
 # 默认情况下可控制通知名称，文件名称等
@@ -76,6 +81,7 @@ LANG=C pactl list sources | grep 'Name.*output'
 
 wf-recorder 的原因。若 wf-recorder 可通过调整部分命令行选项来解决这一问题，请直接对脚本添加这些选项，这些选项将会直接传递给 wf-recorder 。
 
+> 或使用 `wl-screenrec` 做为后端。
 
 参考[这里](https://github.com/ammen99/wf-recorder?tab=readme-ov-file#usage):
 
