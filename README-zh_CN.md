@@ -4,6 +4,8 @@
 
 为便于快捷键使用的简易的 [wf-recorder](https://github.com/ammen99/wf-recorder) 的 bash 脚本封装，实现在基于 wlroots 的 wayland 混成器上进行选区录屏。
 
+https://github.com/user-attachments/assets/5424662d-9f1e-4302-888f-3cb0a7e98bca
+
 ## 特性
 
 - [x] 变量配置
