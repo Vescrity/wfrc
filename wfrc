@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# v0.1.2
+# v0.1.3
 XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
 WFRC_FOLDER="${WFRC_FOLDER:-$XDG_RUNTIME_DIR/wfrc}"
 SCRIPT_NAME="${SCRIPT_NAME:-wfrc}"
@@ -7,26 +7,40 @@ WFRC_LOCK="${WFRC_LOCK:-$WFRC_FOLDER/WFRCLOCK}"
 # Set the icon of notification
 WFRC_ICON="${WFRC_ICON:-record}"
 WFRC_RECORDER="${WFRC_RECORDER:-wf-recorder}"
+# 0 to disable notification
+WFRC_NOTIFY="${WFRC_NOTIFY:-1}"
+
+noti_error() {
+    local msg="$1"
+    if [ $WFRC_NOTIFY -eq 1 ]; then
+        notify-send --app-name=$SCRIPT_NAME --icon="$WFRC_ICON" 'Error' "$msg" 
+    else
+        echo "$msg" >&2
+    fi
+}
 if [ "$WFRC_RECORDER" = wl-screenrec ]; then
     audio_option="--audio --audio-device "
 elif [ "$WFRC_RECORDER" = wf-recorder ]; then
     audio_option="--audio="
 else
-    notify-send --app-name=$SCRIPT_NAME 'Error' "Unsupport recorder." --icon="$WFRC_ICON"
+    noti_error "Unsupport recorder."
     exit 1
 fi
+if ! type -P "$WFRC_RECORDER"; then
+    noti_error "$WFRC_RECORDER not found. Install it or set a supported recorder you have."
+    exit 1
+fi
+
 mkdir -p "$WFRC_FOLDER"
 if ! [ -n "$WAYLAND_DISPLAY" ]; then
     WFRC_NOWAYLAND="${WFRC_NOWAYLAND:-No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?}"
     echo "$WFRC_NOWAYLAND" >&2
-    notify-send --app-name=$SCRIPT_NAME 'Error' "$WFRC_NOWAYLAND" --icon="$WFRC_ICON"
+    noti_error "$WFRC_NOWAYLAND"
     exit 1
 fi
 
 # 1 to enable full screen
 WFRC_FULL_SCREEN="${WFRC_FULL_SCREEN:-0}"
-# 0 to disable notification
-WFRC_NOTIFY="${WFRC_NOTIFY:-1}"
 if [ -f "$WFRC_LOCK" ]; then
     kill $(cat "$WFRC_LOCK")
     rm "$WFRC_LOCK"
