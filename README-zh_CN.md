@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-为便于快捷键使用的简易的 [wf-recorder](https://github.com/ammen99/wf-recorder) 及 [wl-screenrec](https://github.com/russelltg/wl-screenrec) 的 bash 脚本封装，实现在基于 wlroots 的 wayland 混成器上进行选区录屏。
+为便于快捷键使用的简易的 [wf-recorder](https://github.com/ammen99/wf-recorder) 及 [wl-screenrec](https://github.com/russelltg/wl-screenrec) 的 bash 脚本封装，实现在 Wayland 合成器上进行选区录屏。支持 `niri`, `hyprland`, 以及基于 wlroots 的各合成器。
 
 > 0.1.2 起, 支持使用 `wl-screenrec` 做为录屏后端。
 > 设置 `WFRC_RECORDER=wl-screenrec` 以启用。

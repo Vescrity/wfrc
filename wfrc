@@ -31,7 +31,6 @@ if ! type -P "$WFRC_RECORDER"; then
     exit 1
 fi
 
-mkdir -p "$WFRC_FOLDER"
 if ! [ -n "$WAYLAND_DISPLAY" ]; then
     WFRC_NOWAYLAND="${WFRC_NOWAYLAND:-No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?}"
     echo "$WFRC_NOWAYLAND" >&2
@@ -46,7 +45,6 @@ if [ -f "$WFRC_LOCK" ]; then
     rm "$WFRC_LOCK"
     exit
 fi
-echo $$ > "$WFRC_LOCK"
 
 kill_wfrc() {
     kill -TERM $recorder_pid
@@ -73,13 +71,11 @@ kill_wfrc() {
     fi
 }
 
-trap 'kill_wfrc $$' SIGINT SIGTERM 
 
 if [ $WFRC_FULL_SCREEN -eq 0 ]; then
     output=$(slurp)
     result=$?
     if ! [ $result -eq 0 ]; then
-        rm "$WFRC_LOCK"
         if [ $WFRC_NOTIFY -eq 1 ]; then
             notify-send --app-name=$SCRIPT_NAME 'Canceled.' --icon="$WFRC_ICON"
         fi
@@ -90,6 +86,11 @@ fi
 if [ $WFRC_NOTIFY -eq 1 ]; then
     notify-send -t 1000 --app-name=$SCRIPT_NAME 'Rec.' --icon="$WFRC_ICON"
 fi
+
+mkdir -p "$WFRC_FOLDER"
+echo $$ > "$WFRC_LOCK"
+trap 'kill_wfrc $$' SIGINT SIGTERM 
+
 WFRC_AUDIO_DEV="${WFRC_AUDIO_DEV:-$(LANG=C pactl get-default-sink).monitor}"
 WFRC_FILE_NAME="${WFRC_FILE_NAME:-$WFRC_FOLDER/$SCRIPT_NAME-$(date +%Y-%m-%dT%H-%M-%S).mp4}"
 if [ $WFRC_FULL_SCREEN -eq 0 ]; then
