@@ -46,7 +46,7 @@ This script's behavior is controled by environment variables. You can make a scr
 # Use wf-recorder as default recorder.
 #WFRC_RECORDER="${WFRC_RECORDER:-wf-recorder}"
 # By default it can control where the file will be stored
-#WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID/wfrc}"
+#WFRC_FOLDER="/tmp/wfrc-$UID"
 # By default it can control the title of the notification and the file's name
 #SCRIPT_NAME="wfrc"
 # Where the lock file

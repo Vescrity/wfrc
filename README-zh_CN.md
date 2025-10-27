@@ -45,7 +45,7 @@ AUR wfrc-git
 # 默认使用 wf-recorder
 #WFRC_RECORDER="${WFRC_RECORDER:-wf-recorder}"
 # 默认情况下可控制文件存放路径
-#WFRC_FOLDER="${XDG_RUNTIME_DIR:-/run/user/$UID/wfrc}"
+#WFRC_FOLDER="/tmp/wfrc-$UID"
 # 默认情况下可控制通知名称，文件名称等
 #SCRIPT_NAME="wfrc"
 # 锁文件的路径
