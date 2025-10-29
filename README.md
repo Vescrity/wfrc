@@ -2,8 +2,7 @@
 
 English | [中文](README-zh_CN.md)
 
-Simple bash script to make recording screen by shortcuts easily. Works on `niri`, `hyprland`, wlroots-based...
-because it uses [wf-recorder](https://github.com/ammen99/wf-recorder) or [wl-screenrec](https://github.com/russelltg/wl-screenrec) as backend.
+A simple bash script to make screen recording with shortcuts easy. Since it uses [wf-recorder](https://github.com/ammen99/wf-recorder) or [wl-screenrec](https://github.com/russelltg/wl-screenrec) as the backend, it works on niri, Hyprland and wlroots-based Wayland compositors.
 
 > Since 0.1.2, `wl-screenrec` can be used as backend.
 > If you want to use it please set `WFRC_RECORDER=wl-screenrec`
@@ -12,11 +11,11 @@ https://github.com/user-attachments/assets/5424662d-9f1e-4302-888f-3cb0a7e98bca
 
 ## Features
 
-- [x] Config by environment variables
-- [x] Area selection
-- [x] Record the audio
-- [x] Notification
-- [x] Copy to your clipboard
+- [x] Customization with environment variables
+- [x] Area selection for recording
+- [x] Audio recording
+- [x] Notifications
+- [x] Automatic clipboard copy
 
 ## Install
 
@@ -34,22 +33,22 @@ now in AUR, `wfrc-git`
 
 ## Usage
 
-- (optional) Add it to your PATH
-- (optional) Bind it to a keybind.
-- Run it for the first time it will run slurp and get an area to record and the second time it will stop recording and copy the video to your clipboard.
+- (optional) Add it to your `PATH`.
+- (optional) Bind it to a key.
+- The first time you run it, it will launch slurp to select a recording area. Running it again will stop recording and copy the video to your clipboard.
 
 ## Config
 
-This script's behavior is controled by environment variables. You can make a script to set them.
+This script's behavior is controlled by environment variables. You can create a script to set them.
 
 ```bash
-# Use wf-recorder as default recorder.
+# Use wf-recorder as the default recorder
 #WFRC_RECORDER="${WFRC_RECORDER:-wf-recorder}"
 # By default it can control where the file will be stored
 #WFRC_FOLDER="/tmp/wfrc-$UID"
-# By default it can control the title of the notification and the file's name
+# By default it can control the title of the notification and the filename
 #SCRIPT_NAME="wfrc"
-# Where the lock file
+# Where the lock file resides
 #WFRC_LOCK="$WFRC_FOLDER/WFRCLOCK"
 # Set the icon of notification
 #WFRC_ICON="record"
@@ -60,7 +59,7 @@ This script's behavior is controled by environment variables. You can make a scr
 # Your audio device
 #WFRC_AUDIO_DEV="$(LANG=C pactl get-default-sink).monitor"
 #WFRC_FILE_NAME="$WFRC_FOLDER/$SCRIPT_NAME-$(date +%Y-%m-%dT%H-%M-%S).mp4"
-# If no wayland, the error msg
+# The error message displayed if Wayland is not detected
 #WFRC_NOWAYLAND="No WAYLAND_DISPLAY found. Did you run me on a wayland compositor?"
 
 . /path/to/wfrc "$@"
@@ -76,7 +75,8 @@ Check this:
 ```bash
 LANG=C pactl list sources | grep 'Name.*output'
 ```
-  If it got more than one line, it means you have more than one audio output device. Use the config script and change `WFRC_AUDIO_DEV` to your device.
+
+If the output is multiline, it means you have more than one audio output device. Use the config script and change `WFRC_AUDIO_DEV` to your device.
 
 ### 2. High CPU usage
 
