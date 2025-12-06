@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# v0.1.4
+#!/usr/bin/bash
+# v0.1.5
 WFRC_FOLDER="${WFRC_FOLDER:-/tmp/wfrc-$UID}"
 SCRIPT_NAME="${SCRIPT_NAME:-wfrc}"
 WFRC_LOCK="${WFRC_LOCK:-$WFRC_FOLDER/WFRCLOCK}"
@@ -17,7 +17,10 @@ noti_error() {
         echo "$msg" >&2
     fi
 }
-if [ "$WFRC_RECORDER" = wl-screenrec ]; then
+if ! pactl stat ; then
+    noti_error "Failed to connect to PulseAudio, is it running?\nThere will be no audio in the video."
+    audio_option=""
+elif [ "$WFRC_RECORDER" = wl-screenrec ]; then
     audio_option="--audio --audio-device "
 elif [ "$WFRC_RECORDER" = wf-recorder ]; then
     audio_option="--audio="
@@ -50,7 +53,7 @@ kill_wfrc() {
     rm $WFRC_LOCK
     echo -n "file://$WFRC_FILE_NAME" | wl-copy -t 'text/uri-list'
     if [ $WFRC_NOTIFY -eq 1 ]; then
-        SIZE="$(ls -lh $WFRC_FILE_NAME | tr -s ' ' | cut -d ' ' -f 5)"
+        SIZE="$(ls -lh "$WFRC_FILE_NAME" | tr -s ' ' | cut -d ' ' -f 5)"
         ENDTIME=$(date +%s)
         duration=$((ENDTIME - STARTTIME))
         if [ $WFRC_FULL_SCREEN -eq 0 ]; then
